@@ -14,4 +14,8 @@ interface MALService {
     @POST("/auth/token")
     suspend fun refreshToken(@Field("client_id") clientID: String, @Field("grant_type  ") grantType: String,
                       @Field("refresh_token")  refreshToken: String)
+
+    companion object {
+        const val ENDPOINT = ""
+    }
 }
