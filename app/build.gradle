@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.skybox.seven.senpai"
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dynamicFeatures = []
 }
 
 dependencies {
