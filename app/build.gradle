@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -40,6 +41,7 @@ dependencies {
     // android and kotlin issues
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
     // google UI
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -57,10 +59,14 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:$versions.hilt"
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroidXVersion"
+    kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroidXVersion"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:okhttp:4.5.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
 
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycle}"

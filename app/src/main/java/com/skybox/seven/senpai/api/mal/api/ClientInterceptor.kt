@@ -1,6 +1,6 @@
 package com.skybox.seven.senpai.api.mal.api
 
-import com.skybox.seven.senpai.api.mal.login.AuthTokenDataSource
+import com.skybox.seven.senpai.data.source.AuthTokenDataSource
 import okhttp3.Interceptor
 import okhttp3.Response
 

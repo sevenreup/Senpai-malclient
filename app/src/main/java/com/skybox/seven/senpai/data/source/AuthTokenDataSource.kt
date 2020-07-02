@@ -1,4 +1,4 @@
-package com.skybox.seven.senpai.api.mal.login
+package com.skybox.seven.senpai.data.source
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -33,8 +33,12 @@ class AuthTokenDataSource(private val prefs: SharedPreferences) {
         @Volatile private var INSTANCE: AuthTokenDataSource? = null
 
         fun getInstance(sharedPreferences: SharedPreferences): AuthTokenDataSource {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: AuthTokenDataSource(sharedPreferences).also {
+            return INSTANCE
+                ?: synchronized(this) {
+                INSTANCE
+                    ?: AuthTokenDataSource(
+                        sharedPreferences
+                    ).also {
                     INSTANCE = it
                 }
             }
