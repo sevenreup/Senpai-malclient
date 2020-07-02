@@ -1,4 +1,4 @@
-package com.skybox.seven.core.mal.login
+package com.skybox.seven.senpai.api.mal.login
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

@@ -1,4 +1,4 @@
-package com.skybox.seven.core.mal.model
+package com.skybox.seven.senpai.api.mal.model
 
 import com.google.gson.annotations.SerializedName
 

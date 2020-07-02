@@ -1,4 +1,4 @@
-package com.skybox.seven.core.mal.api
+package com.skybox.seven.senpai.api.mal.api
 
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

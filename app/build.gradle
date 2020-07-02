@@ -3,8 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-apply from: '../shared_deps.gradle'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -32,18 +30,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dynamicFeatures = []
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // android and kotlin issues
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
-
+    implementation "androidx.core:core-ktx:${versions.coreKtx}"
 
     // google UI
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
+    implementation "com.google.android.material:material:${versions.material}"
 
     // epoxy
     implementation 'com.airbnb.android:epoxy:3.11.0'
@@ -53,6 +54,19 @@ dependencies {
     // Android room database
     implementation "androidx.room:room-runtime:$versions.room_version"
     annotationProcessor "androidx.room:room-compiler:$versions.room_version"
+
+    implementation "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
 
     // tests
     testImplementation 'junit:junit:4.12'

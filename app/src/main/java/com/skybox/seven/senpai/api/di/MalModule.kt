@@ -1,7 +1,7 @@
-package com.skybox.seven.core.di
+package com.skybox.seven.senpai.api.di
 
 import com.google.gson.GsonBuilder
-import com.skybox.seven.core.mal.api.MALService
+import com.skybox.seven.senpai.api.mal.api.MALService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

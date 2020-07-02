@@ -1,12 +1,8 @@
 package com.skybox.seven.senpai;
 
 
-import dagger.android.AndroidInjector;
-import dagger.android.support.DaggerApplication;
+import android.app.Application;
 
-public class SenpaiApplication extends DaggerApplication {
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return null;
-    }
+
+public class SenpaiApplication extends Application {
 }
