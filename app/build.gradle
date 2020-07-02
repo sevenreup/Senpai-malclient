@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 apply from: '../shared_deps.gradle'
 
@@ -38,6 +39,10 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // android and kotlin issues
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 
     // google UI
     implementation 'androidx.appcompat:appcompat:1.1.0'
