@@ -1,7 +1,8 @@
 dependencies {
     implementation "com.google.android.material:material:${versions.material}"
 
-    implementation "com.google.dagger:dagger:${versions.dagger}"
+    implementation "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
 
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
 
