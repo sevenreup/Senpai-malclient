@@ -57,7 +57,7 @@ object AppModule {
     @Provides
     fun providesRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl(Constants.ENDPOINT)
+        .baseUrl(Constants.MAL_ENDPOINT)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .build()
 
