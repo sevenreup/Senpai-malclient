@@ -1,4 +1,4 @@
-package com.skybox.seven.senpai.viewmodel
+package com.skybox.seven.senpai.ui.login
 
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
