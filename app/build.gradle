@@ -42,6 +42,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
     implementation "androidx.core:core-ktx:${versions.coreKtx}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // google UI
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -55,10 +56,12 @@ dependencies {
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     // epoxy
-    implementation 'com.airbnb.android:epoxy:3.11.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt 'com.airbnb.android:epoxy-processor:3.11.0'
-    implementation 'com.airbnb.android:epoxy-glide-preloading:3.11.0'
+    implementation "com.airbnb.android:epoxy:$versions.epoxyVersion"
+    kapt "com.airbnb.android:epoxy-processor:$versions.epoxyVersion"
+    implementation "com.airbnb.android:epoxy-glide-preloading:$versions.epoxyVersion"
+
+    // lottie
+    implementation "com.airbnb.android:lottie:$versions.lottieVersion"
 
     // Android room database
     implementation "androidx.room:room-runtime:$versions.room_version"
