@@ -1,6 +1,7 @@
 package com.skybox.seven.senpai.epoxy.home
 
 import android.content.Context
+import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.Typed2EpoxyController
 import com.skybox.seven.senpai.api.jikan.model.Anime
 import com.skybox.seven.senpai.epoxy.anime.AnimeOneModel_
@@ -19,7 +20,7 @@ class HomeController(val context: Context?): Typed2EpoxyController<Boolean, List
                 )
             }
         }
-        CarouselOneHomeModelModel_().id("home").models(modelList).addTo(this)
+        CarouselOneHomeModelModel_().id("home").numViewsToShowOnScreen(2.5f).models(modelList).addTo(this)
     }
 
 }
