@@ -1,11 +1,11 @@
 package com.skybox.seven.senpai.epoxy.home
 
 import android.content.Context
-import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.Typed2EpoxyController
 import com.skybox.seven.senpai.api.jikan.model.Anime
 import com.skybox.seven.senpai.epoxy.anime.AnimeOneModel_
-import java.util.ArrayList
+import com.skybox.seven.senpai.epoxy.anime.AnimeViewGroupOne
+import java.util.*
 
 class HomeController(val context: Context?): Typed2EpoxyController<Boolean, List<Anime>>() {
 
@@ -16,7 +16,10 @@ class HomeController(val context: Context?): Typed2EpoxyController<Boolean, List
         animeList?.forEach {
             modelList.add(AnimeOneModel_().id(it.malId).context(context!!).image(it.imageUrl).preloading(true))
         }
-        CarouselOneHomeModelModel_().id("home").numViewsToShowOnScreen(2.5f).models(modelList).addTo(this)
+
+        AnimeViewGroupOne(context!!,"Now Airing", animeList!!).addTo(this)
+        AnimeViewGroupOne(context,"Trending", animeList).addTo(this)
+        AnimeViewGroupOne(context,"Next Season", animeList).addTo(this)
     }
 
 }
