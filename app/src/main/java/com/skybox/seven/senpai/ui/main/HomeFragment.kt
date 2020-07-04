@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.skybox.seven.senpai.R
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_home.*
 
 private const val TAG = "HomeFragment"
@@ -27,6 +28,10 @@ class HomeFragment : Fragment() {
         viewModel.randomSpotAnime.observe(viewLifecycleOwner, Observer {
             spot_anime_title.text = it.title
             spot_anime_information.text = it.score.toString()
+            Glide.with(this)
+                .load(it.imageUrl)
+                .centerCrop()
+                .into(spot_anime_image)
         })
         
         viewModel.getRandomSeason()

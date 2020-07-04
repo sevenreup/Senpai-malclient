@@ -7,6 +7,13 @@
     tools:context=".ui.main.HomeFragment"
     app:layoutDescription="@xml/main_app_scene">
 
+    <ImageView android:id="@+id/spot_anime_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView android:id="@+id/spot_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
