@@ -2,11 +2,13 @@ package com.skybox.seven.senpai.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.skybox.seven.senpai.SenpaiApplication
 import com.skybox.seven.senpai.api.jikan.api.JikanService
 import com.skybox.seven.senpai.api.mal.api.ClientInterceptor
 import com.skybox.seven.senpai.api.mal.api.MALService
+import com.skybox.seven.senpai.data.room.SenpaiDatabase
 import com.skybox.seven.senpai.data.source.AuthTokenDataSource
 import com.skybox.seven.senpai.data.source.PreferencesRepository
 import com.skybox.seven.senpai.util.Constants
@@ -84,6 +86,12 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .build()
 
+
+    @Singleton
+    @Provides
+    fun providesDatabase(@ApplicationContext context: Context): SenpaiDatabase {
+        return Room.databaseBuilder(context, SenpaiDatabase::class.java, "anime.senpai.db").build()
+    }
 
     @Singleton
     @Provides
