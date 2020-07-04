@@ -9,17 +9,23 @@
 
     <ImageView android:id="@+id/spot_anime_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        android:tint="#A40E0E0E"/>
 
     <TextView android:id="@+id/spot_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Spotlight"
+        app:layout_constraintTop_toBottomOf="@id/search_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"/>
 
     <TextView android:id="@+id/spot_anime_title"
         android:layout_width="wrap_content"
@@ -27,7 +33,10 @@
         android:text="Attack on Titan"
         app:layout_constraintTop_toBottomOf="@id/spot_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"/>
 
     <TextView android:id="@+id/spot_anime_information"
         android:layout_width="wrap_content"
@@ -35,7 +44,10 @@
         android:text="(30 episodes, 3 seasons)"
         app:layout_constraintTop_toBottomOf="@id/spot_anime_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"/>
 
     <View android:id="@+id/separator"
         android:layout_width="0dp"
@@ -43,6 +55,15 @@
         app:layout_constraintTop_toBottomOf="@id/spot_anime_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView android:id="@+id/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        android:tint="@android:color/white"/>
 
     <com.airbnb.epoxy.EpoxyRecyclerView android:id="@+id/main_recyclerview"
         android:layout_width="0dp"
