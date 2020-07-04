@@ -57,11 +57,12 @@ dependencies {
     // epoxy
     implementation 'com.airbnb.android:epoxy:3.11.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    annotationProcessor 'com.airbnb.android:epoxy-processor:3.11.0'
+    kapt 'com.airbnb.android:epoxy-processor:3.11.0'
+    implementation 'com.airbnb.android:epoxy-glide-preloading:3.11.0'
 
     // Android room database
     implementation "androidx.room:room-runtime:$versions.room_version"
-    annotationProcessor "androidx.room:room-compiler:$versions.room_version"
+    kapt "androidx.room:room-compiler:$versions.room_version"
 
     implementation "com.google.dagger:hilt-android:$versions.hilt"
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"

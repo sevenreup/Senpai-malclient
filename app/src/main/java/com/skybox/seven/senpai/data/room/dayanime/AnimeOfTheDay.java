@@ -1,7 +1,9 @@
 package com.skybox.seven.senpai.data.room.dayanime;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+@Entity(tableName = "animeOfTheDay")
 public class AnimeOfTheDay {
     @PrimaryKey
      public Integer malId;
