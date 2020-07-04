@@ -17,6 +17,7 @@ private const val TAG = "HomeViewModel"
 
 class HomeViewModel @ViewModelInject constructor(private val jikanService: JikanService) : ViewModel() {
     var randomSpotAnime: MutableLiveData<Anime> = MutableLiveData()
+    var trendingAnime: MutableLiveData<List<Anime>> = MutableLiveData()
 
     fun getRandomSeason() {
         val calender = Calendar.getInstance().get(Calendar.YEAR) - 20
@@ -30,8 +31,9 @@ class HomeViewModel @ViewModelInject constructor(private val jikanService: Jikan
 
             override fun onResponse(call: Call<Season>, response: Response<Season>) {
                 if (response.isSuccessful) {
-                    val season = response.body()
-                    val anime = season?.anime?.get(RandomGen.getRandomInt(0, season?.anime.size - 1))
+                    val seasonResp = response.body()
+                    trendingAnime.value = seasonResp?.anime?.subList(0, 5)
+                    val anime = seasonResp?.anime?.get(RandomGen.getRandomInt(0, seasonResp.anime.size - 1))
                     randomSpotAnime.value = anime
                 } else {
                     Log.e(TAG, "onResponse: failure ${response.message()}")
