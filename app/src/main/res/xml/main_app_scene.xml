@@ -8,7 +8,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp">
+            <CustomAttribute motion:attributeName="ColorFilter" motion:customColorValue="@android:color/white"/>
+        </Constraint>
         <Constraint
             android:id="@+id/separator"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +51,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintTop_toTopOf="@id/spot_anime_image"/>
+        <Constraint
+            android:id="@id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp">
+            <CustomAttribute motion:attributeName="ColorFilter" motion:customColorValue="@android:color/black"/>
+        </Constraint>
     </ConstraintSet>
 
     <Transition

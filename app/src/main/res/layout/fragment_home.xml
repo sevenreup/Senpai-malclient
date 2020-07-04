@@ -61,13 +61,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_search"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-        android:tint="@android:color/white"/>
-    
-    <com.google.android.material.appbar.MaterialToolbar
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.epoxy.EpoxyRecyclerView android:id="@+id/main_recyclerview"
         android:layout_width="0dp"

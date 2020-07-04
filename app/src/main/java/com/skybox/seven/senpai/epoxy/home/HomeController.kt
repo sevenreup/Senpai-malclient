@@ -14,11 +14,7 @@ class HomeController(val context: Context?): Typed2EpoxyController<Boolean, List
         val modelList: ArrayList<AnimeOneModel_> = ArrayList()
 
         animeList?.forEach {
-            context?.let { it1 -> AnimeOneModel_().id(it.malId).context(it1).image(it.imageUrl) }?.let { it2 ->
-                modelList.add(
-                    it2
-                )
-            }
+            modelList.add(AnimeOneModel_().id(it.malId).context(context!!).image(it.imageUrl).preloading(true))
         }
         CarouselOneHomeModelModel_().id("home").numViewsToShowOnScreen(2.5f).models(modelList).addTo(this)
     }
