@@ -8,7 +8,7 @@ import com.skybox.seven.senpai.epoxy.groups.AnimeViewGroupOne
 import com.skybox.seven.senpai.epoxy.groups.AnimeViewGroupTwo
 import java.util.*
 
-class HomeController(val context: Context?): Typed2EpoxyController<Boolean, List<Anime>>() {
+class HomeController(val context: Context?, val callback: BasicControllerCallbacks): Typed2EpoxyController<Boolean, List<Anime>>() {
 
 
     override fun buildModels(loading: Boolean?, animeList: List<Anime>?) {
@@ -20,16 +20,23 @@ class HomeController(val context: Context?): Typed2EpoxyController<Boolean, List
 
         AnimeViewGroupOne(
             "Now Airing",
-            animeList!!
+            animeList!!,
+            callback
         ).addTo(this)
         AnimeViewGroupTwo(
             "Trending",
-            animeList
+            animeList,
+            callback
         ).addTo(this)
         AnimeViewGroupOne(
             "Next Season",
-            animeList
+            animeList,
+            callback
         ).addTo(this)
+    }
+
+    public interface BasicControllerCallbacks {
+        fun onAnimeClick(anime: Anime)
     }
 
 }

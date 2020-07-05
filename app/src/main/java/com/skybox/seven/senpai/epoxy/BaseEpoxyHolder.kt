@@ -36,4 +36,8 @@ abstract class BaseEpoxyHolder: EpoxyHolder() {
         }
     }
 
+    public fun setViewClickListener(lister: View.OnClickListener) {
+        view.setOnClickListener(lister)
+    }
+
 }

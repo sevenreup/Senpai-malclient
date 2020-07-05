@@ -1,5 +1,6 @@
 package com.skybox.seven.senpai.epoxy.anime
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.airbnb.epoxy.EpoxyAttribute
@@ -25,6 +26,7 @@ abstract class AnimeTwoModel: EpoxyModelWithHolder<AnimeTwoModel.AnimeTwoHolder>
     lateinit var type: String
     @EpoxyAttribute
     var preloading: Boolean = false
+    @EpoxyAttribute lateinit var animeClickListener: View.OnClickListener
 
     override fun getDefaultLayout(): Int {
         return R.layout.model_anime_two
@@ -40,6 +42,7 @@ abstract class AnimeTwoModel: EpoxyModelWithHolder<AnimeTwoModel.AnimeTwoHolder>
         holder.title.text = title
         holder.type.text = type
         holder.episodes.text = "$episodes episodes"
+        holder.setViewClickListener(animeClickListener)
     }
 
     override fun unbind(holder: AnimeTwoHolder) {

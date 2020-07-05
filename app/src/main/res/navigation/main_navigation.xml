@@ -5,9 +5,20 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/homeFragment">
 
+    <action android:id="@+id/toAnimePage" app:destination="@id/animeFragment"/>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.skybox.seven.senpai.ui.main.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/animeFragment"
+        android:name="com.skybox.seven.senpai.ui.anime.AnimeFragment"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" >
+        <argument
+            android:name="anime"
+            app:argType="com.skybox.seven.senpai.api.jikan.model.Anime" />
+    </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package com.skybox.seven.senpai.epoxy.anime
 
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -17,6 +18,7 @@ abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>
     @EpoxyAttribute lateinit var image: String
     @EpoxyAttribute
     var preloading: Boolean = false
+    @EpoxyAttribute lateinit var animeClickListener: View.OnClickListener
 
     override fun getDefaultLayout(): Int {
         return R.layout.model_anime_one
@@ -29,6 +31,7 @@ abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>
     override fun bind(holder: AnimeOneHolder) {
         super.bind(holder)
         holder.glide.loadImage(image, preloading, holderType).into(holder.image)
+        holder.setViewClickListener(animeClickListener)
     }
 
     override fun unbind(holder: AnimeOneHolder) {

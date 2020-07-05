@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
@@ -21,69 +22,89 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.ObjectKey
 import com.skybox.seven.senpai.R
+import com.skybox.seven.senpai.api.jikan.model.Anime
 import com.skybox.seven.senpai.epoxy.anime.AnimeOneModel_
 import com.skybox.seven.senpai.epoxy.anime.AnimeTwoModel_
 import com.skybox.seven.senpai.epoxy.home.HomeController
+import com.skybox.seven.senpai.ui.anime.AnimeFragmentDirections
+import com.skybox.seven.senpai.ui.anime.AnimeFragment_GeneratedInjector
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_home.*
 
 private const val TAG = "HomeFragment"
+
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
     lateinit var viewModel: HomeViewModel
+    private lateinit var v: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.fragment_home, container, false)
-        val recycler = v.findViewById<EpoxyRecyclerView>(R.id.main_recyclerview)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        val homeController = HomeController(context)
-        recycler.setController(homeController)
-        recycler.addGlidePreloader(Glide.with(context!!), preloader =
-        glidePreloader { requestManager, epoxyModel: AnimeOneModel_, _->
-            requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
-        })
-        recycler.addGlidePreloader(Glide.with(context!!), preloader =
-        glidePreloader { requestManager: RequestManager, epoxyModel: AnimeTwoModel_, _->
-            requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
-        })
+            v = inflater.inflate(R.layout.fragment_home, container, false)
+            val recycler = v.findViewById<EpoxyRecyclerView>(R.id.main_recyclerview)
+            viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+            val homeController = HomeController(context, this)
+            recycler.setController(homeController)
+            recycler.addGlidePreloader(Glide.with(requireContext()), preloader =
+            glidePreloader { requestManager, epoxyModel: AnimeOneModel_, _ ->
+                requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
+            })
+            recycler.addGlidePreloader(Glide.with(requireContext()), preloader =
+            glidePreloader { requestManager: RequestManager, epoxyModel: AnimeTwoModel_, _ ->
+                requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
+            })
 
-        viewModel.randomSpotAnime.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                Log.e(TAG, "onCreateView: ${it.score}")
-                spot_anime_title.text = it.title
-                spot_anime_information.text = it.score.toString()
-                Glide.with(this)
-                    .load(it.imageUrl)
-                    .centerCrop()
-                    .into(spot_anime_image)
-            }
+            viewModel.randomSpotAnime.observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    Log.e(TAG, "onCreateView: ${it.score}")
+                    spot_anime_title.text = it.title
+                    spot_anime_information.text = it.score.toString()
+                    Glide.with(this)
+                        .load(it.imageUrl)
+                        .centerCrop()
+                        .into(spot_anime_image)
+                }
 
-        })
+            })
 
-        viewModel.trendingAnime.observe(viewLifecycleOwner, Observer {
-            Log.e(TAG, "onCreateView: $it")
-            homeController.setData(false, it)
-        })
-        
-        viewModel.getRandomSeason()
+            viewModel.trendingAnime.observe(viewLifecycleOwner, Observer {
+                Log.e(TAG, "onCreateView: $it")
+                homeController.setData(false, it)
+            })
+
+            viewModel.getRandomSeason()
         return v
+    }
+
+    override fun onAnimeClick(anime: Anime) {
+        val action = AnimeFragmentDirections.toAnimePage(anime)
+        findNavController().navigate(action)
     }
 
 }
 
-fun RequestManager.loadImage(url: String, isPreloading: Boolean, holderType: Int): RequestBuilder<Bitmap> {
+fun RequestManager.loadImage(
+    url: String,
+    isPreloading: Boolean,
+    holderType: Int
+): RequestBuilder<Bitmap> {
 
     val options = provideGenericRequestOptions(url, isPreloading)
-    when(holderType) {
+    when (holderType) {
         0 -> {
             options.dontAnimate()
         }
         1 -> {
-            options.transform(RoundedCornersTransformation(40, 0, RoundedCornersTransformation.CornerType.ALL))
+            options.transform(
+                RoundedCornersTransformation(
+                    40,
+                    0,
+                    RoundedCornersTransformation.CornerType.ALL
+                )
+            )
         }
     }
 

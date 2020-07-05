@@ -3,7 +3,9 @@ package com.skybox.seven.senpai.api.jikan.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Genre {
+import java.io.Serializable;
+
+public class Genre implements Serializable {
 
     @SerializedName("mal_id")
     @Expose
