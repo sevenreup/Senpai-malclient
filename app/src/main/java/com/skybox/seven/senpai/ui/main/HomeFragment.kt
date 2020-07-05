@@ -37,22 +37,23 @@ private const val TAG = "HomeFragment"
 @AndroidEntryPoint
 class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
     lateinit var viewModel: HomeViewModel
-    private lateinit var v: View
+    private var v: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        if (v==null) {
             v = inflater.inflate(R.layout.fragment_home, container, false)
-            val recycler = v.findViewById<EpoxyRecyclerView>(R.id.main_recyclerview)
+            val recycler = v?.findViewById<EpoxyRecyclerView>(R.id.main_recyclerview)
             viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
             val homeController = HomeController(context, this)
-            recycler.setController(homeController)
-            recycler.addGlidePreloader(Glide.with(requireContext()), preloader =
+            recycler?.setController(homeController)
+            recycler?.addGlidePreloader(Glide.with(requireContext()), preloader =
             glidePreloader { requestManager, epoxyModel: AnimeOneModel_, _ ->
                 requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
             })
-            recycler.addGlidePreloader(Glide.with(requireContext()), preloader =
+            recycler?.addGlidePreloader(Glide.with(requireContext()), preloader =
             glidePreloader { requestManager: RequestManager, epoxyModel: AnimeTwoModel_, _ ->
                 requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
             })
@@ -76,6 +77,7 @@ class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
             })
 
             viewModel.getRandomSeason()
+        }
         return v
     }
 
