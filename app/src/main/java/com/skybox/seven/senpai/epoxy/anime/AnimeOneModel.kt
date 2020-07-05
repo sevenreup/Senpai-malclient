@@ -12,9 +12,9 @@ import com.skybox.seven.senpai.epoxy.BaseEpoxyHolder
 import com.skybox.seven.senpai.ui.main.loadImage
 
 @EpoxyModelClass(layout = R.layout.model_anime_one)
-abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>() {
+abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>(){
+    val holderType = 0
     @EpoxyAttribute lateinit var image: String
-    @EpoxyAttribute lateinit var context: Context
     @EpoxyAttribute
     var preloading: Boolean = false
 
@@ -28,14 +28,13 @@ abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>
 
     override fun bind(holder: AnimeOneHolder) {
         super.bind(holder)
-        holder.glide.loadImage(image, preloading).into(holder.image)
+        holder.glide.loadImage(image, preloading, holderType).into(holder.image)
     }
 
     override fun unbind(holder: AnimeOneHolder) {
         holder.glide.clear(holder.image)
         holder.image.setImageDrawable(null)
     }
-
     class AnimeOneHolder: BaseEpoxyHolder(), Preloadable {
         val image by bind<ImageView>(R.id.model_image)
         val glide by lazy { Glide.with(image.context) }

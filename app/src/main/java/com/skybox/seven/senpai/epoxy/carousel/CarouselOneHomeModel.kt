@@ -1,4 +1,4 @@
-package com.skybox.seven.senpai.epoxy.home
+package com.skybox.seven.senpai.epoxy.carousel
 
 import android.content.Context
 import android.view.View

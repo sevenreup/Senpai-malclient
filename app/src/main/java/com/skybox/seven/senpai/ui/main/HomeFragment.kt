@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
+import com.airbnb.epoxy.preload.ViewData
+import com.airbnb.epoxy.preload.ViewMetadata
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
@@ -20,8 +22,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.ObjectKey
 import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.epoxy.anime.AnimeOneModel_
+import com.skybox.seven.senpai.epoxy.anime.AnimeTwoModel_
 import com.skybox.seven.senpai.epoxy.home.HomeController
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_home.*
 
 private const val TAG = "HomeFragment"
@@ -40,7 +44,11 @@ class HomeFragment : Fragment() {
         recycler.setController(homeController)
         recycler.addGlidePreloader(Glide.with(context!!), preloader =
         glidePreloader { requestManager, epoxyModel: AnimeOneModel_, _->
-            requestManager.loadImage(epoxyModel.image(), true)
+            requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
+        })
+        recycler.addGlidePreloader(Glide.with(context!!), preloader =
+        glidePreloader { requestManager: RequestManager, epoxyModel: AnimeTwoModel_, _->
+            requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
         })
 
         viewModel.randomSpotAnime.observe(viewLifecycleOwner, Observer {
@@ -67,14 +75,24 @@ class HomeFragment : Fragment() {
 
 }
 
-fun RequestManager.loadImage(url: String, isPreloading: Boolean): RequestBuilder<Bitmap> {
+fun RequestManager.loadImage(url: String, isPreloading: Boolean, holderType: Int): RequestBuilder<Bitmap> {
 
-    val options = RequestOptions
-        .diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
-        .dontAnimate()
-        .signature(ObjectKey(url.plus(if (isPreloading) "_preloading" else "_not_preloading")))
+    val options = provideGenericRequestOptions(url, isPreloading)
+    when(holderType) {
+        0 -> {
+            options.dontAnimate()
+        }
+        1 -> {
+            options.transform(RoundedCornersTransformation(40, 0, RoundedCornersTransformation.CornerType.ALL))
+        }
+    }
 
     return asBitmap()
         .apply(options)
         .load(url)
 }
+
+fun provideGenericRequestOptions(url: String, isPreloading: Boolean) =
+    RequestOptions
+        .diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
+        .signature(ObjectKey(url.plus(if (isPreloading) "_preloading" else "_not_preloading")))
