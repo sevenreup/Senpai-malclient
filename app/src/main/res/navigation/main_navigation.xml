@@ -6,6 +6,10 @@
     app:startDestination="@id/homeFragment">
 
     <action android:id="@+id/toAnimePage" app:destination="@id/animeFragment"/>
+    <action android:id="@+id/toHome" app:destination="@id/homeFragment"/>
+    <action android:id="@+id/toSearch" app:destination="@id/searchFragment"/>
+    <action android:id="@+id/toLists" app:destination="@id/listsFragment"/>
+    <action android:id="@+id/toSettings" app:destination="@id/settingsFragment"/>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -21,4 +25,19 @@
             android:name="anime"
             app:argType="com.skybox.seven.senpai.api.jikan.model.Anime" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.skybox.seven.senpai.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/listsFragment"
+        android:name="com.skybox.seven.senpai.ui.lists.ListsFragment"
+        android:label="fragment_lists"
+        tools:layout="@layout/fragment_lists" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.skybox.seven.senpai.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

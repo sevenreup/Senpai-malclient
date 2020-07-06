@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
+    <item android:id="@+id/toHome"
         android:title="Home"
         android:icon="@drawable/ic_home"/>
-    <item
+    <item android:id="@+id/toSearch"
         android:title="Search"
         android:icon="@drawable/ic_search"/>
-    <item
+    <item android:id="@+id/toLists"
         android:title="List"
         android:icon="@drawable/ic_list"/>
 
-    <item
+    <item android:id="@+id/toSettings"
         android:title="Settings"
         android:icon="@drawable/ic_settings"/>
 </menu>
