@@ -7,4 +7,13 @@
             <enum name="up" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="DefaultIndicator">
+        <attr name="dotsColor" format="integer"/>
+        <attr name="dotsSize" format="integer"/>
+        <attr name="dotsSpacing" format="integer"/>
+        <attr name="dotsCornerRadius" format="integer"/>
+        <attr name="dotsStrokeColor" format="color"/>
+        <attr name="dotsStrokeWidth" format="dimension"/>
+    </declare-styleable>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".ui.anime.AnimeFragment">
-    
+
     <com.skybox.seven.customviews.FadeImage.FadeEdgeImage
         android:id="@+id/anime_cover"
         android:layout_width="match_parent"
