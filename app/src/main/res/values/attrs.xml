@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="FadeEdgeImage">
-        <attr name="edge" format="integer"/>
-        <attr name="edgeDirection" format="enum">
-            <enum name="down" value="0"/>
-            <enum name="up" value="1"/>
-        </attr>
-    </declare-styleable>
+
 </resources>

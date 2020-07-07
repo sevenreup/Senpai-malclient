@@ -39,6 +39,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':customviews')
+
     // android and kotlin issues
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
     implementation "androidx.core:core-ktx:${versions.coreKtx}"

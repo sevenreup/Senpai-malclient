@@ -1,4 +1,4 @@
-package com.skybox.seven.senpai.views;
+package com.skybox.seven.customviews.FadeImage;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
-import com.skybox.seven.senpai.R;
+import com.skybox.seven.customviews.R;
 
 public class FadeEdgeImage extends androidx.appcompat.widget.AppCompatImageView {
     private int mFadeSide;
