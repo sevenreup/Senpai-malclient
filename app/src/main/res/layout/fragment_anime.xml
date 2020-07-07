@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    app:layoutDescription="@xml/fragment_anime_scene"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     tools:context=".ui.anime.AnimeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.skybox.seven.senpai.views.FadeEdgeImage
+        android:id="@+id/anime_cover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/zero_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:edge="50"
+        app:edgeDirection="down"
+        android:foreground="@drawable/image_fade_effect"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/anime_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anime Title"
+        app:layout_constraintBottom_toTopOf="@id/anime_info_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/anime_info_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/anime_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 episodes" />
+    </LinearLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
