@@ -9,10 +9,10 @@
     </declare-styleable>
 
     <declare-styleable name="DefaultIndicator">
-        <attr name="dotsColor" format="integer"/>
-        <attr name="dotsSize" format="integer"/>
-        <attr name="dotsSpacing" format="integer"/>
-        <attr name="dotsCornerRadius" format="integer"/>
+        <attr name="dotsColor" format="color"/>
+        <attr name="dotsSize" format="dimension"/>
+        <attr name="dotsSpacing" format="dimension"/>
+        <attr name="dotsCornerRadius" format="dimension"/>
         <attr name="dotsStrokeColor" format="color"/>
         <attr name="dotsStrokeWidth" format="dimension"/>
     </declare-styleable>
