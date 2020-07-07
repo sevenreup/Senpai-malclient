@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
-import com.airbnb.epoxy.preload.ViewData
-import com.airbnb.epoxy.preload.ViewMetadata
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
@@ -27,7 +27,7 @@ import com.skybox.seven.senpai.epoxy.anime.AnimeOneModel_
 import com.skybox.seven.senpai.epoxy.anime.AnimeTwoModel_
 import com.skybox.seven.senpai.epoxy.home.HomeController
 import com.skybox.seven.senpai.ui.anime.AnimeFragmentDirections
-import com.skybox.seven.senpai.ui.anime.AnimeFragment_GeneratedInjector
+import com.skybox.seven.senpai.ui.home.HomeSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -36,7 +36,8 @@ private const val TAG = "HomeFragment"
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
-    lateinit var viewModel: HomeViewModel
+    val viewModel: HomeViewModel by activityViewModels()
+    val sharedViewModel: HomeSharedViewModel by activityViewModels()
     private var v: View? = null
 
     override fun onCreateView(
@@ -46,7 +47,6 @@ class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
         if (v==null) {
             v = inflater.inflate(R.layout.fragment_home, container, false)
             val recycler = v?.findViewById<EpoxyRecyclerView>(R.id.main_recyclerview)
-            viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
             val homeController = HomeController(context, this)
             recycler?.setController(homeController)
             recycler?.addGlidePreloader(Glide.with(requireContext()), preloader =
@@ -58,6 +58,12 @@ class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
                 requestManager.loadImage(epoxyModel.image(), true, epoxyModel.holderType)
             })
 
+            recycler?.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    sharedViewModel.scrollDirection.value = dy
+                }
+            })
             viewModel.randomSpotAnime.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     Log.e(TAG, "onCreateView: ${it.score}")

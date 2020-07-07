@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.HomeFragment"
-    app:layoutDescription="@xml/main_app_scene">
+    app:layoutDescription="@xml/main_app_scene"
+    android:id="@+id/motionlayout">
 
     <ImageView android:id="@+id/spot_anime_image"
         android:layout_width="match_parent"
