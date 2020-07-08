@@ -68,7 +68,7 @@ class HomeFragment : Fragment(), HomeController.BasicControllerCallbacks {
                 if (it != null) {
                     Log.e(TAG, "onCreateView: ${it.score}")
                     spot_anime_title.text = it.title
-                    spot_anime_information.text = it.score.toString()
+                    spot_anime_information.text = if (it.score == null) "Not scored" else it.score.toString()
                     Glide.with(this)
                         .load(it.imageUrl)
                         .centerCrop()
