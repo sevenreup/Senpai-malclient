@@ -130,7 +130,7 @@ class FancyIndicator @JvmOverloads constructor(
         dot.layoutDirection = View.LAYOUT_DIRECTION_LTR
         val dotImageView = dot.findViewById<View>(R.id.worm_dot)
         dotImageView.setBackgroundResource(
-            if (stroke) R.drawable.worm_dot_background else R.drawable.worm_dot_background
+            if (stroke) R.drawable.worm_dot_stroke_background else R.drawable.worm_dot_background
         )
         val params = dotImageView.layoutParams as RelativeLayout.LayoutParams
         params.height = dotsSize.toInt()
