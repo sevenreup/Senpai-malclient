@@ -25,7 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/search_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.Senpai.Headline6"
         android:textColor="@android:color/white"/>
 
     <TextView android:id="@+id/spot_anime_title"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"
-        android:textSize="22sp"
+        android:textAppearance="@style/TextAppearance.Senpai.Headline5"
         android:textColor="@android:color/white"/>
 
     <TextView android:id="@+id/spot_anime_information"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
-        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.Senpai.Headline6"
         android:textColor="@android:color/white"/>
 
     <View android:id="@+id/separator"
