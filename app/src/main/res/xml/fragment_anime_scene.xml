@@ -10,16 +10,33 @@
             android:layout_height="300dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expand_holder"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_holder"
+            app:layout_constraintTop_toTopOf="@id/recycler_holder" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
         <Constraint android:id="@id/anime_cover"
             app:layout_constraintBottom_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="300dp" />
+        <Constraint
+            android:id="@id/expand_holder"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_holder"
+            app:layout_constraintTop_toTopOf="@id/recycler_holder"
+            android:rotation="180"/>
     </ConstraintSet>
 
     <Transition
         app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start"/>
+        app:constraintSetStart="@+id/start">
+        <OnClick app:targetId="@+id/expand_holder" app:clickAction="toggle"/>
+    </Transition>
 </MotionScene>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.skybox.seven.senpai.adapter.AnimeViewPagerAdapter
 import com.skybox.seven.senpai.databinding.FragmentAnimeBinding
 import com.skybox.seven.senpai.epoxy.AnimeTabController
@@ -31,6 +32,8 @@ class AnimeFragment : Fragment() {
         _binding = FragmentAnimeBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        viewModel.activeAnimeData.value = args.anime
+
         val adapter = AnimeViewPagerAdapter(childFragmentManager, lifecycle)
         val controller = AnimeTabController { binding.animeViewpager.setCurrentItem(it, true)}
         binding.animeViewpager.adapter = adapter
@@ -46,6 +49,8 @@ class AnimeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val anime = args.anime
+        Glide.with(requireContext()).load(anime.imageUrl).into(binding.animeCover)
     }
 
     override fun onDestroyView() {
