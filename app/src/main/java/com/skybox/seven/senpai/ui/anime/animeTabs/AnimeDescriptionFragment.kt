@@ -1,4 +1,4 @@
-package com.skybox.seven.senpai.ui.anime
+package com.skybox.seven.senpai.ui.anime.animeTabs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.chip.Chip
-import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.api.jikan.model.Anime
 import com.skybox.seven.senpai.databinding.FragmentAnimeBinding
 import com.skybox.seven.senpai.databinding.FragmentAnimeDescriptionBinding
+import com.skybox.seven.senpai.ui.anime.AnimeViewModel
 
 
 class AnimeDescriptionFragment : Fragment() {

@@ -21,9 +21,5 @@
 
     <Transition
         app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start">
-        <OnSwipe app:touchAnchorId="@+id/viewpager"
-            app:touchAnchorSide="top"
-            app:dragDirection="dragUp"/>
-    </Transition>
+        app:constraintSetStart="@+id/start"/>
 </MotionScene>

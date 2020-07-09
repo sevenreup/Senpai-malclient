@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.adapter.AnimeViewPagerAdapter
 import com.skybox.seven.senpai.databinding.FragmentAnimeBinding
+import com.skybox.seven.senpai.epoxy.AnimeTabController
+import com.skybox.seven.senpai.util.ViewPagerTabsHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_anime.*
 
@@ -23,6 +27,8 @@ class AnimeFragment : Fragment() {
     private val viewModel: AnimeViewModel by activityViewModels()
     private val args: AnimeFragmentArgs by navArgs()
 
+    private lateinit var tabsHandler: ViewPagerTabsHandler;
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,22 +36,27 @@ class AnimeFragment : Fragment() {
         _binding = FragmentAnimeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModel.activeAnimeData.value = args.anime
-
         val adapter = AnimeViewPagerAdapter(childFragmentManager, lifecycle)
-        binding.viewpager.adapter = adapter
-        binding.pageIndicator.setViewPager2(binding.viewpager)
+        val controller = AnimeTabController()
+        binding.animeViewpager.adapter = adapter
+        binding.tabsRecycler.setController(controller)
+        controller.setData(AnimeViewPagerAdapter.animeTabTitles)
+
+        tabsHandler = ViewPagerTabsHandler(binding.animeViewpager, binding.tabsRecycler)
+        tabsHandler.init()
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val anime = args.anime
-        binding.animeTitle.text = anime.title
-        Glide.with(view).load(anime.imageUrl).into(binding.animeCover)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val numOfTabs = 2
     }
 }

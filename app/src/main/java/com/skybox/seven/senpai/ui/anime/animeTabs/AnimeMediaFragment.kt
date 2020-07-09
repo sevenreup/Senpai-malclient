@@ -1,4 +1,4 @@
-package com.skybox.seven.senpai.ui.anime
+package com.skybox.seven.senpai.ui.anime.animeTabs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.skybox.seven.senpai.ui.anime.AnimeDescriptionFragment
-import com.skybox.seven.senpai.ui.anime.AnimeMediaFragment
+import com.skybox.seven.senpai.ui.anime.animeTabs.AnimeDescriptionFragment
+import com.skybox.seven.senpai.ui.anime.animeTabs.AnimeMediaFragment
 
 class AnimeViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
@@ -17,5 +17,9 @@ class AnimeViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecyc
             1-> return AnimeMediaFragment()
         }
         return AnimeDescriptionFragment()
+    }
+
+    companion object {
+        val animeTabTitles = arrayListOf("First", "Second")
     }
 }
