@@ -4,16 +4,13 @@ import android.content.Context
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.airbnb.epoxy.AfterPropsSet
-import com.airbnb.epoxy.ModelView
-import com.airbnb.epoxy.TextProp
+import com.airbnb.epoxy.*
 import com.google.android.material.card.MaterialCardView
 import com.skybox.seven.senpai.R
 
 @ModelView(autoLayout = ModelView.Size.WRAP_WIDTH_WRAP_HEIGHT)
 class PagerTabIndicatorModel @JvmOverloads constructor(context: Context)
     : RelativeLayout(context) {
-
     private lateinit var titleView: TextView
 
     init {
@@ -27,5 +24,9 @@ class PagerTabIndicatorModel @JvmOverloads constructor(context: Context)
     @AfterPropsSet
     fun useProps() {
         titleView.text = title
+        setOnClickListener(listener)
     }
+
+    var listener: View.OnClickListener? = null
+        @CallbackProp set
 }

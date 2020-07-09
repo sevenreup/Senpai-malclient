@@ -1,24 +1,18 @@
 package com.skybox.seven.senpai.ui.anime
 
 import android.os.Bundle
-import android.view.DragEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.adapter.AnimeViewPagerAdapter
 import com.skybox.seven.senpai.databinding.FragmentAnimeBinding
 import com.skybox.seven.senpai.epoxy.AnimeTabController
 import com.skybox.seven.senpai.util.DefaultItemDecorator
 import com.skybox.seven.senpai.util.ViewPagerTabsHandler
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_anime.*
 
 @AndroidEntryPoint
 class AnimeFragment : Fragment() {
@@ -38,7 +32,7 @@ class AnimeFragment : Fragment() {
         val view = binding.root
 
         val adapter = AnimeViewPagerAdapter(childFragmentManager, lifecycle)
-        val controller = AnimeTabController()
+        val controller = AnimeTabController { binding.animeViewpager.setCurrentItem(it, true)}
         binding.animeViewpager.adapter = adapter
         binding.tabsRecycler.setController(controller)
         binding.tabsRecycler.setItemSpacingPx(100)
