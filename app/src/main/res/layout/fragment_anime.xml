@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorAccent">
 
             <com.skybox.seven.senpai.views.NoScrollRecyclerView
                 android:id="@+id/tabs_recycler"

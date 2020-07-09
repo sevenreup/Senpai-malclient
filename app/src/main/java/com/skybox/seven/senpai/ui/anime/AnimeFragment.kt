@@ -15,6 +15,7 @@ import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.adapter.AnimeViewPagerAdapter
 import com.skybox.seven.senpai.databinding.FragmentAnimeBinding
 import com.skybox.seven.senpai.epoxy.AnimeTabController
+import com.skybox.seven.senpai.util.DefaultItemDecorator
 import com.skybox.seven.senpai.util.ViewPagerTabsHandler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_anime.*
@@ -40,6 +41,8 @@ class AnimeFragment : Fragment() {
         val controller = AnimeTabController()
         binding.animeViewpager.adapter = adapter
         binding.tabsRecycler.setController(controller)
+        binding.tabsRecycler.setItemSpacingPx(100)
+        binding.tabsRecycler.addItemDecoration(DefaultItemDecorator(20, 20))
         controller.setData(AnimeViewPagerAdapter.animeTabTitles)
 
         tabsHandler = ViewPagerTabsHandler(binding.animeViewpager, binding.tabsRecycler)

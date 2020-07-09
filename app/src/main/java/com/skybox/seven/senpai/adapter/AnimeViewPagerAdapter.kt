@@ -20,6 +20,6 @@ class AnimeViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecyc
     }
 
     companion object {
-        val animeTabTitles = arrayListOf("First", "Second")
+        val animeTabTitles = arrayListOf("Overview", "Characters")
     }
 }
