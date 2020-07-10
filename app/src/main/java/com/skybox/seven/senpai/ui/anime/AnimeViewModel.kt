@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.palette.graphics.Palette
 import com.skybox.seven.senpai.api.jikan.api.JikanService
 import com.skybox.seven.senpai.api.jikan.model.Anime
 import com.skybox.seven.senpai.api.jikan.model.StatsResponse
@@ -14,6 +15,7 @@ import retrofit2.Response
 private const val TAG = "AnimeViewModel"
 class AnimeViewModel @ViewModelInject constructor(private val jikanService: JikanService): ViewModel() {
      val activeAnimeData: MutableLiveData<Anime> = MutableLiveData()
+     val palleteData: MutableLiveData<Palette> = MutableLiveData()
      val animeStatsData: MutableLiveData<StatsResponse> = MutableLiveData()
 
      fun getStats(id: Int?) {

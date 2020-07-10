@@ -123,5 +123,5 @@ fun RequestManager.loadImage(
 
 fun provideGenericRequestOptions(url: String, isPreloading: Boolean) =
     RequestOptions
-        .diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC)
+        .diskCacheStrategyOf(DiskCacheStrategy.ALL)
         .signature(ObjectKey(url.plus(if (isPreloading) "_preloading" else "_not_preloading")))
