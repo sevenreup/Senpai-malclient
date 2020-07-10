@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:tint="#CE1A2020"/>
+        android:tint="@color/cover_tint"
+        android:foreground="@drawable/image_fade_effect"/>
 
     <ImageView android:id="@+id/anime_cover_top"
         android:layout_width="140dp"

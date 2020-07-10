@@ -1,11 +1,14 @@
 package com.skybox.seven.senpai.ui.anime
 
-import android.graphics.Bitmap
+import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,11 +21,11 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.DrawableCrossFadeTransition
+import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.adapter.AnimeViewPagerAdapter
 import com.skybox.seven.senpai.databinding.FragmentAnimeBinding
 import com.skybox.seven.senpai.epoxy.AnimeTabController
-import com.skybox.seven.senpai.util.DefaultItemDecorator
-import com.skybox.seven.senpai.util.ViewPagerTabsHandler
+import com.skybox.seven.senpai.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 
@@ -53,7 +56,7 @@ class AnimeFragment : Fragment() {
         binding.tabsRecycler.addItemDecoration(DefaultItemDecorator(20, 20))
         controller.setData(AnimeViewPagerAdapter.animeTabTitles)
 
-        tabsHandler = ViewPagerTabsHandler(binding.animeViewpager, binding.tabsRecycler)
+        tabsHandler = ViewPagerTabsHandler(binding.animeViewpager, binding.tabsRecycler, ContextCompat.getColor(requireContext(), R.color.tab_selected_color))
         tabsHandler.init()
 
         return view
@@ -86,7 +89,12 @@ class AnimeFragment : Fragment() {
                 ): Boolean {
                     if (resource != null) {
                         Palette.from(resource.toBitmap()).generate {
-                            viewModel.palleteData.value = it
+                            val swatch:Palette.Swatch = if (getMode(requireContext()) == Configuration.UI_MODE_NIGHT_NO) getLightSwatch(it!!) else getDarkSwatch(it!!)
+                            viewModel.swatchData.value = swatch
+                            binding.animeCover.imageTintList = ColorStateList.valueOf(ColorUtils.setAlphaComponent(swatch.rgb, 200))
+                            binding.spotAnimeTitle.setTextColor(swatch.bodyTextColor)
+                            binding.recyclerHolder.setBackgroundColor(swatch.rgb)
+                            tabsHandler.loadColor(swatch.rgb)
                         }
                         target?.onResourceReady(resource, DrawableCrossFadeTransition(1000, isFirstResource))
                     }

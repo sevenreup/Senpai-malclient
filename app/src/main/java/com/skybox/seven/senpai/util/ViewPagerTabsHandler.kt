@@ -10,17 +10,17 @@ import com.skybox.seven.senpai.R
 import com.skybox.seven.senpai.epoxy.AnimeTabController
 import com.skybox.seven.senpai.ui.anime.AnimeFragment
 import com.skybox.seven.senpai.views.NoScrollRecyclerView
-import kotlinx.android.synthetic.main.model_anime_tab_indicator.view.*
 
 @SuppressLint("WrongConstant")
-class ViewPagerTabsHandler(private val viewPager2: ViewPager2, private val tabsRecyclerView: NoScrollRecyclerView) {
+class ViewPagerTabsHandler(private val viewPager2: ViewPager2,
+                           private val tabsRecyclerView: NoScrollRecyclerView, col: Int) {
     private val context = viewPager2.context
 
-//    private val tabItemWidth: Float by bindDimen(context, R.dimen.tab_item_width)
     private val tabColor: Int by bindColor(context, R.color.tab_unselected_color)
-    private val tabSelectedColor: Int by bindColor(context, R.color.tab_selected_color)
+    private var tabSelectedColor: Int = col
 
     private var totalTabsScroll = 0
+    private var currentTab = 0
 
     fun init() {
         viewPager2.offscreenPageLimit = AnimeFragment.numOfTabs
@@ -39,7 +39,7 @@ class ViewPagerTabsHandler(private val viewPager2: ViewPager2, private val tabsR
                 positionOffsetPixels: Int
             ) {
                 val currentTabView = tabsRecyclerView.layoutManager?.findViewByPosition(position) ?: return
-
+                currentTab = position
                 val dx = (position + positionOffset) * 64 - totalTabsScroll
                 tabsRecyclerView.scrollBy(dx.toInt(), 0)
 
@@ -58,4 +58,12 @@ class ViewPagerTabsHandler(private val viewPager2: ViewPager2, private val tabsR
             }
         })
     }
+
+    fun loadColor(color: Int) {
+        tabSelectedColor = color
+        val currentTabView = tabsRecyclerView.layoutManager?.findViewByPosition(currentTab) ?: return
+        currentTabView.findViewById<View>(R.id.background).backgroundTintList =
+            ColorStateList.valueOf(blendColors(tabColor, color, 1 - .8f))
+    }
+
 }

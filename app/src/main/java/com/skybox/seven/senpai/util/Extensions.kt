@@ -21,6 +21,6 @@ fun blendColors(color1: Int, color2: Int, ratio: Float): Int {
     return Color.argb(a.toInt(), r.toInt(), g.toInt(), b.toInt())
 }
 
-fun Any.bindColor(context: Context, @ColorRes id: Int) = lazy(LazyThreadSafetyMode.NONE) {
+fun bindColor(context: Context, @ColorRes id: Int) = lazy(LazyThreadSafetyMode.NONE) {
     ContextCompat.getColor(context, id)
 }

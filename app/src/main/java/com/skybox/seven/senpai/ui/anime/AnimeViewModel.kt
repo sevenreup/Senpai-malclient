@@ -15,7 +15,7 @@ import retrofit2.Response
 private const val TAG = "AnimeViewModel"
 class AnimeViewModel @ViewModelInject constructor(private val jikanService: JikanService): ViewModel() {
      val activeAnimeData: MutableLiveData<Anime> = MutableLiveData()
-     val palleteData: MutableLiveData<Palette> = MutableLiveData()
+     val swatchData: MutableLiveData<Palette.Swatch> = MutableLiveData()
      val animeStatsData: MutableLiveData<StatsResponse> = MutableLiveData()
 
      fun getStats(id: Int?) {
