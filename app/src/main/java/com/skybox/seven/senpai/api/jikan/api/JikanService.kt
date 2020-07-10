@@ -24,4 +24,7 @@ interface JikanService {
     @GET("anime/{id}/videos")
     fun getVideos(@Path(value = "id") id: Int): Call<VideosResponse>
 
+    @GET("anime/{id}/stats")
+    fun getStats(@Path(value = "id") id: Int): Call<StatsResponse>
+
 }

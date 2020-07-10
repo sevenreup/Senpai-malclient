@@ -1,6 +1,5 @@
 package com.skybox.seven.senpai.jsonDeserializer;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -26,10 +25,16 @@ public class StatsDeserializer implements JsonDeserializer<StatsResponse> {
         response.setPlanToWatch(object.get("plan_to_watch").getAsInt());
         response.setTotal(object.get("total").getAsInt());
 
-        JsonArray scores = object.getAsJsonArray("scores");
-        for (JsonElement element: scores) {
-            element.getAsJsonObject();
+        JsonObject scoresObj = object.getAsJsonObject("scores");
+        for (String key: scoresObj.keySet()) {
+            JsonObject object1 = scoresObj.getAsJsonObject(key);
+            StatsResponse.Score score = new StatsResponse.Score();
+            score.setVotes(object1.get("votes").getAsInt());
+            score.setPercentage(object1.get("percentage").getAsDouble());
+            score.setScore(key);
+            response.getScoreList().add(score);
         }
+
 
         return response;
     }

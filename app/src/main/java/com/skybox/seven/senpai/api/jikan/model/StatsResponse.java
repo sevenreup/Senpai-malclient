@@ -1,8 +1,5 @@
 package com.skybox.seven.senpai.api.jikan.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +96,34 @@ public class StatsResponse {
         this.scoreList = scoreList;
     }
 
-    private static class Score {
+    public static class Score {
+        private String score;
+        private Integer votes;
+        private Double percentage;
+
+        public String getScore() {
+            return score;
+        }
+
+        public void setScore(String score) {
+            this.score = score;
+        }
+
+        public Integer getVotes() {
+            return votes;
+        }
+
+        public void setVotes(Integer votes) {
+            this.votes = votes;
+        }
+
+        public Double getPercentage() {
+            return percentage;
+        }
+
+        public void setPercentage(Double percentage) {
+            this.percentage = percentage;
+        }
 
     }
 

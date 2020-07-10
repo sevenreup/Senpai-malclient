@@ -6,11 +6,13 @@ import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.skybox.seven.senpai.SenpaiApplication
 import com.skybox.seven.senpai.api.jikan.api.JikanService
+import com.skybox.seven.senpai.api.jikan.model.StatsResponse
 import com.skybox.seven.senpai.api.mal.api.ClientInterceptor
 import com.skybox.seven.senpai.api.mal.api.MALService
 import com.skybox.seven.senpai.data.room.SenpaiDatabase
 import com.skybox.seven.senpai.data.source.AuthTokenDataSource
 import com.skybox.seven.senpai.data.source.PreferencesRepository
+import com.skybox.seven.senpai.jsonDeserializer.StatsDeserializer
 import com.skybox.seven.senpai.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -27,17 +29,23 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {
-    @Qualifier annotation class MalApiBuilder
-    @Qualifier annotation class MalApiClient
+    @Qualifier
+    annotation class MalApiBuilder
 
-    @Qualifier annotation class JikanApiBuilder
-    @Qualifier annotation class JikanApiClient
+    @Qualifier
+    annotation class MalApiClient
+
+    @Qualifier
+    annotation class JikanApiBuilder
+
+    @Qualifier
+    annotation class JikanApiClient
 
     // Mal Config
     @MalApiClient
     @Singleton
     @Provides
-    fun providesMalOkHttpClient(authTokenDataSource: AuthTokenDataSource): OkHttpClient  {
+    fun providesMalOkHttpClient(authTokenDataSource: AuthTokenDataSource): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
         return OkHttpClient.Builder()
@@ -64,7 +72,7 @@ object AppModule {
     @JikanApiClient
     @Singleton
     @Provides
-    fun providesJikanOkHttpClient(): OkHttpClient  {
+    fun providesJikanOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
         return OkHttpClient.Builder()
@@ -80,11 +88,18 @@ object AppModule {
     @JikanApiBuilder
     @Singleton
     @Provides
-    fun providesJikanRetrofit(@JikanApiClient client: OkHttpClient): Retrofit = Retrofit.Builder()
-        .client(client)
-        .baseUrl(Constants.JIKAN_ENDPOINT)
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-        .build()
+    fun providesJikanRetrofit(@JikanApiClient client: OkHttpClient): Retrofit {
+
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.registerTypeAdapter(StatsResponse::class.java, StatsDeserializer())
+        gsonBuilder.setLenient()
+
+        return Retrofit.Builder()
+            .client(client)
+            .baseUrl(Constants.JIKAN_ENDPOINT)
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
+            .build()
+    }
 
 
     @Singleton
@@ -100,7 +115,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesAuthTokenDataSource(sharedPreferences: SharedPreferences):AuthTokenDataSource =
+    fun providesAuthTokenDataSource(sharedPreferences: SharedPreferences): AuthTokenDataSource =
         AuthTokenDataSource(sharedPreferences)
 
 
