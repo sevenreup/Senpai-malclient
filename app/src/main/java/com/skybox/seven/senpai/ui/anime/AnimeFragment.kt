@@ -28,6 +28,7 @@ import com.skybox.seven.senpai.epoxy.AnimeTabController
 import com.skybox.seven.senpai.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 @AndroidEntryPoint
 class AnimeFragment : Fragment() {
@@ -70,6 +71,7 @@ class AnimeFragment : Fragment() {
             .into(binding.animeCover)
         Glide.with(requireContext())
             .load(anime.imageUrl)
+            .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(40, 0)))
             .listener(object: RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
@@ -91,10 +93,10 @@ class AnimeFragment : Fragment() {
                         Palette.from(resource.toBitmap()).generate {
                             val swatch:Palette.Swatch = if (getMode(requireContext()) == Configuration.UI_MODE_NIGHT_NO) getLightSwatch(it!!) else getDarkSwatch(it!!)
                             viewModel.swatchData.value = swatch
-                            binding.animeCover.imageTintList = ColorStateList.valueOf(ColorUtils.setAlphaComponent(swatch.rgb, 200))
-                            binding.spotAnimeTitle.setTextColor(swatch.bodyTextColor)
+                            binding.animeCover.imageTintList = ColorStateList.valueOf(ColorUtils.setAlphaComponent(swatch.rgb, 255))
                             binding.recyclerHolder.setBackgroundColor(swatch.rgb)
                             tabsHandler.loadColor(swatch.rgb)
+                            activity?.window?.statusBarColor  = swatch.rgb
                         }
                         target?.onResourceReady(resource, DrawableCrossFadeTransition(1000, isFirstResource))
                     }
