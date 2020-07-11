@@ -33,6 +33,7 @@ class AnimeViewGroupOne(
                 animeModelList.add(
                     AnimeOneModel_().id(it.malId)
                         .image(it.imageUrl)
+                        .title(it.title)
                         .animeClickListener { animeOneModel_: AnimeOneModel_, animeOneHolder: AnimeOneModel.AnimeOneHolder, view: View, i: Int ->
                             callbacks.onAnimeClick(it)
                         }
@@ -42,7 +43,7 @@ class AnimeViewGroupOne(
                 HeaderOneModelModel_().id(title).modelTitle(title)
             )
             modelList.add(
-                CarouselOneHomeModelModel_().id("airing").numViewsToShowOnScreen(2.5f).models(animeModelList)
+                CarouselOneHomeModelModel_().id("airing").numViewsToShowOnScreen(2.1f).models(animeModelList)
             )
             return modelList
         }

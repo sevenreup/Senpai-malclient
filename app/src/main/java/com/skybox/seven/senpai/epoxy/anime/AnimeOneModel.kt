@@ -1,8 +1,8 @@
 package com.skybox.seven.senpai.epoxy.anime
 
-import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -16,8 +16,8 @@ import com.skybox.seven.senpai.ui.main.loadImage
 abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>(){
     val holderType = 0
     @EpoxyAttribute lateinit var image: String
-    @EpoxyAttribute
-    var preloading: Boolean = false
+    @EpoxyAttribute lateinit var title: String
+    @EpoxyAttribute var preloading: Boolean = false
     @EpoxyAttribute lateinit var animeClickListener: View.OnClickListener
 
     override fun getDefaultLayout(): Int {
@@ -30,6 +30,7 @@ abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>
 
     override fun bind(holder: AnimeOneHolder) {
         super.bind(holder)
+        holder.title.text = title
         holder.glide.loadImage(image, preloading, holderType).into(holder.image)
         holder.setViewClickListener(animeClickListener)
     }
@@ -39,6 +40,7 @@ abstract class AnimeOneModel: EpoxyModelWithHolder<AnimeOneModel.AnimeOneHolder>
         holder.image.setImageDrawable(null)
     }
     class AnimeOneHolder: BaseEpoxyHolder(), Preloadable {
+        val title by bind<TextView>(R.id.model_title)
         val image by bind<ImageView>(R.id.model_image)
         val glide by lazy { Glide.with(image.context) }
         override val viewsToPreload by lazy { listOf(image) }

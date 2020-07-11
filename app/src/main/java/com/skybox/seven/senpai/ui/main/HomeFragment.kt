@@ -103,7 +103,7 @@ fun RequestManager.loadImage(
     val options = provideGenericRequestOptions(url, isPreloading)
     when (holderType) {
         0 -> {
-            options.dontAnimate()
+            options.dontAnimate().circleCrop()
         }
         1 -> {
             options.transform(
