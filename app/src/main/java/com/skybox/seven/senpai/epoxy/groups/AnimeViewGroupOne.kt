@@ -43,7 +43,7 @@ class AnimeViewGroupOne(
                 HeaderOneModelModel_().id(title).modelTitle(title)
             )
             modelList.add(
-                CarouselOneHomeModelModel_().id("airing").numViewsToShowOnScreen(2.1f).models(animeModelList)
+                CarouselOneHomeModelModel_().id("airing").numViewsToShowOnScreen(2.5f).models(animeModelList)
             )
             return modelList
         }

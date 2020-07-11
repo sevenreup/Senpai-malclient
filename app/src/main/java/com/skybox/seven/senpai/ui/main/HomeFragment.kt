@@ -29,6 +29,7 @@ import com.skybox.seven.senpai.epoxy.home.HomeController
 import com.skybox.seven.senpai.ui.anime.AnimeFragmentDirections
 import com.skybox.seven.senpai.ui.home.HomeSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -103,7 +104,7 @@ fun RequestManager.loadImage(
     val options = provideGenericRequestOptions(url, isPreloading)
     when (holderType) {
         0 -> {
-            options.dontAnimate().circleCrop()
+            options.dontAnimate().transform(BlurTransformation(4, 1))
         }
         1 -> {
             options.transform(

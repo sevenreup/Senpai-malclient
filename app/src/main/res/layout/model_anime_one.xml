@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="140dp"
-    android:layout_height="wrap_content"
-    android:padding="0dp"
+    android:layout_width="200dp"
+    android:layout_height="230dp"
     android:layout_margin="0dp"
+    android:padding="0dp"
     app:cardCornerRadius="20dp">
 
-        <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
             android:id="@+id/model_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/zero_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@mipmap/ic_launcher"
+            android:tint="@color/cover_tint"
+            android:foreground="@drawable/image_fade_effect"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView android:id="@+id/model_image_top"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-        <TextView android:id="@+id/model_title"
+        <TextView
+            android:id="@+id/model_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Attack On Titan"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:text="Attack on Titan"
             android:textAlignment="center"
-            android:padding="4dp"
-            android:maxLines="2"
-            app:layout_constraintTop_toBottomOf="@id/model_image"
+            android:textAppearance="@style/TextAppearance.Senpai.Caption"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/model_image_top" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
